@@ -3,6 +3,7 @@ public class Ingredient {
     private final String inName;
     private double inQuantity;
     private double priceOfEachUnit;
+
     
     public Ingredient(String inName, double inQuantity, double priceOfEachUnit){
         this.inName = inName;
@@ -13,6 +14,7 @@ public class Ingredient {
             this.priceOfEachUnit = priceOfEachUnit;
         }
     }
+
 //unit price
     public void updatePrice(double priceOfEachUnit){
         if(priceOfEachUnit > 0){
@@ -36,6 +38,9 @@ public class Ingredient {
         if(amount > 0){
             this.inQuantity += amount;
         }
+    }
+    public void deductQuan(double amount){
+        inQuantity -= amount;
     }
     public double getQuan(){
         return inQuantity;
