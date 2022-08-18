@@ -2,21 +2,18 @@ import java.awt.event.*;
 import java.awt.*;
 //import Customer.CustomerPage;
 
+import javax.print.FlavorException;
 import javax.swing.*;
+import javax.swing.text.LabelView;
 public class HomePage extends JFrame implements ActionListener{
     private JButton button_customer;
     private JButton button_Admin;
-    //private CustomerPage customer;
+    private CustomerPage customer;
+    private EmployeePage employeePage ;
     HomePage(){
         JLabel label = new JLabel();
-        ImageIcon bgm = new ImageIcon("bg_image.png");
-        button_customer = new JButton("Customer");
-        button_Admin = new JButton("Admin");
-
-        button_customer.setBounds(400,690, 100, 50);
-        button_Admin.setBounds(800, 690, 100, 50);
-        button_customer.addActionListener(this);
-        button_Admin.addActionListener(this);
+        JLabel label2 = new JLabel();
+        
         
         ImageIcon bgImage = new ImageIcon("bg_image.png");
         label.setIcon(bgImage);
@@ -26,7 +23,16 @@ public class HomePage extends JFrame implements ActionListener{
         label.setVerticalAlignment(JLabel.CENTER);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setLayout(null);
-        label.setBounds(60,40 ,1200, 800);
+        label.setBounds(0,0 ,1200, 800);
+
+        button_customer = new JButton("Customer");
+        button_Admin = new JButton("Admin");
+        button_Admin.addActionListener(this);
+
+        button_customer.setBounds(400,690, 100, 50);
+        button_Admin.setBounds(800, 690, 100, 50);
+        button_customer.addActionListener(this);
+        button_Admin.addActionListener(this);
 
         this.setTitle("IchiraKu Raman Shop");
         this.setVisible(true);
@@ -34,16 +40,22 @@ public class HomePage extends JFrame implements ActionListener{
         this.setSize(1200,800);
         this.setLayout(null);
         this.add(label);
+        this.add(label2);
         this.add(button_customer);
         this.add(button_Admin);
-        //customer = new CustomerPage(false);
+        this.setLocationRelativeTo(null);
+        customer = new CustomerPage(this);
+        employeePage = new EmployeePage(this);
 
     }
       public void actionPerformed(ActionEvent ae) {
             if(ae.getSource()==button_customer){
-                System.out.println("Start");
-            }else if(ae.getSource()==button_Admin){
-                
+                customer.setVisible(true);
+                this.setVisible(false);
+               
+            }
+            else if(ae.getSource()==button_Admin){
+                employeePage.setVisible(true);
                 this.setVisible(false);
             }
         } 

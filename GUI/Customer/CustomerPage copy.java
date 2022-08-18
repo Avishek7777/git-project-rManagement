@@ -1,5 +1,5 @@
-package Customer;
 
+//package Customer;
 import javax.swing.JFrame;
 import javax.swing.UIDefaults.LazyValue;
 import javax.swing.*;
@@ -8,9 +8,11 @@ public class CustomerPage extends JFrame{
     private JPanel panel ;
     private JLabel label ;
 
-    
-    CustomerPage(boolean x){
-     ///************** Label ************** */ 
+    CustomerPage(){
+
+       
+
+        ///************** Label ************** */ 
         label = new JLabel();
         panel = new JPanel(); ;
         label.setOpaque(false);
@@ -31,12 +33,12 @@ public class CustomerPage extends JFrame{
         panel.add(label);
 
         this.setResizable(true);
-        this.setVisible(x);
+        this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setBackground(new Color(255,255,255));
         this.add(panel);
     }
-    /*public static void main(String[] args){
+    public static void main(String[] args){
         CustomerPage obj = new CustomerPage();
-    }*/
+    }
 }
