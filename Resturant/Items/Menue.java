@@ -37,7 +37,7 @@ public class Menue {
     }
     public void buy(String fName, int n) {
         for (int i = 0; i < menue.size(); ++i) {
-            if (menue.get(i).getFName().equals(fName) || menue.get(i).getQuan() > n){
+            if (fName.equals(menue.get(i).getFName()) && menue.get(i).getQuan() > n){
                 menue.get(i).order(n);
                 saveMenue();
                 System.out.println("order placed");
