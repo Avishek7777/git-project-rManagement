@@ -1,34 +1,64 @@
 package Resturant.Items;
+import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.FileReader;
 
 
 public class Menue {
-    private Food[] items = new Food[5];
+    private ArrayList<Food> menue = new ArrayList<Food>();
 
-    public Menue() {
-        this.items[0] = new Food("chicken-grill", 90, 130);
-        this.items[1] = new Food("burger", 70, 170);
-        this.items[2] = new Food("pizza", 40, 260);
-        this.items[3] = new Food("chicken-fried", 120, 90);
-        this.items[4] = new Food("fries", 200, 50);
+    public Menue(){
+        initMenue();
     }
-
+    private void initMenue(){
+        try{
+            String line;
+            BufferedReader reader = new BufferedReader(new FileReader(".//Resturant//items//menueItems.txt"));
+            while((line = reader.readLine()) != null){
+                String[] res = line.split("[,]", 0);
+                menue.add(new Food(res[0],Integer.parseInt(res[1]),Double.parseDouble(res[2])));                
+            }
+            reader.close();
+        }catch(Exception e){e.printStackTrace();}
+    }
+    private void saveMenue(){
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter(".//Resturant//items//menueItems.txt"));
+            for(int i = 0; i < menue.size(); i++){
+                menue.get(i).writeFood(writer);
+            }
+            writer.close();
+        }catch(Exception e){e.printStackTrace();}
+    }
     public int getListLength() {
-        return this.items.length;
+        return menue.size();
     }
-
-    public Boolean cAvilable(String fName, int n) {
-        for (int i = 0; i < this.items.length; ++i) {
-            if (this.items[i].getFName() != fName || this.items[i].getQuan() < n) continue;
-            return true;
-        }
-        return false;
-    }
-
     public void buy(String fName, int n) {
-        for (int i = 0; i < this.items.length; ++i) {
-            if (this.items[i].getFName() != fName || this.items[i].getQuan() < n) continue;
-            this.items[i].order(n);
-            System.out.println("Your " + n + " " + fName + " will be ready in a moment");
+        for (int i = 0; i < menue.size(); ++i) {
+            if (menue.get(i).getFName().equals(fName) || menue.get(i).getQuan() > n){
+                menue.get(i).order(n);
+                saveMenue();
+                System.out.println("order placed");
+                return;
+            }
         }
+        System.out.println("order not available");
     }
+    // public void buy(String fName, int n) {
+    //     for (int i = 0; i < menue.size(); ++i) {
+    //         if (menue.get(i).getFName() != fName || menue.get(i).getQuan() < n) continue;
+    //         menue.get(i).order(n);
+    //         saveMenue();
+    //         System.out.println("Your " + n + " " + fName + " will be ready in a moment");
+    //         break;
+    //     }
+    //     System.out.println("not available");
+    // }  
+    public void seeFoods(){
+        for(int i = 0; i < menue.size(); i++){
+            menue.get(i).foodINFO();
+        }
+    }  
 }
