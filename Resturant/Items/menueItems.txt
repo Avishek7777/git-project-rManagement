@@ -1,5 +1,0 @@
-burger,30,120.0
-pizza,40,240.99
-taco,200,70.50
-cheese-cake,60,299.99
-chicken-roast,90,120
